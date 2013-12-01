@@ -4,6 +4,9 @@ namespace CourseRegistrationSystem
 {
     public class Student
     {
+        //----------------------
+        // Private Data Members
+        //----------------------
         string studentID;
         string studentFirstName;
         string studentLastName;
@@ -18,10 +21,25 @@ namespace CourseRegistrationSystem
         Course[] completedCourses = new Course[1];
         Course[] currentCourses = new Course[1];
 
+        //---------------------
+        // Default constructor
+        //---------------------
         public Student()
         {
         }
 
+        // reads information from the filename path to fill the data members
+        // dat files should be in the following format
+        /*
+         * student id
+         * student first name
+         * student last name
+         * password
+         * email address
+         * hold status
+         * {completed course 1, completed course 2, ..., completed course n}
+         * {current course 1, current course 2, ..., current course n}
+         */
         public void fillStudent(string fileName)
         {
             char tempChar;
@@ -64,12 +82,13 @@ namespace CourseRegistrationSystem
 
             fromDat.Close();
         }
-
+        
+        // Adds a course object to the students current courses array
         public bool addCourse(Course courseToAdd)
         {
             bool canAdd = true;
 
-            if (prereqsMet(courseToAdd) && courseToAdd.isOpen())
+            if (prereqsMet(courseToAdd) && courseToAdd.isOpen() && !timeOverlap(courseToAdd))
                 canAdd = true;
 
             if (canAdd)
@@ -78,6 +97,7 @@ namespace CourseRegistrationSystem
             return canAdd;
         }
 
+        // Removes a course object from the students current courses array
         public bool dropCourse(Course courseToDrop)
         {
             bool canDrop = false;
@@ -94,6 +114,7 @@ namespace CourseRegistrationSystem
             return canDrop;
         }
 
+        // Compares the prerequisits of the input course with the completed courses array to determine if the prereqs are met
         public bool prereqsMet(Course courseToAdd)
         {
             bool areMet = false;
@@ -119,6 +140,7 @@ namespace CourseRegistrationSystem
             return areMet;
         }
 
+        // Compares the current schedule of the student and the propsed class to add to check for time conflictions
         public bool timeOverlap(Course courseToAdd)
         {
             bool isOverlapping = false;
@@ -144,6 +166,9 @@ namespace CourseRegistrationSystem
             return isOverlapping;
         }
 
+        //--------------------
+        // Standard accessors
+        //--------------------
         public string getStudentID()
         {
             return studentID;

@@ -43,6 +43,7 @@ namespace CourseRegistrationSystem
         // Public member functions
         //-------------------------
 
+        // returns ture if there is room for another student
         public bool isOpen()
         {
             bool isRoom = false;
@@ -53,6 +54,9 @@ namespace CourseRegistrationSystem
             return isRoom;
         }
 
+        //--------------------
+        // Standard accessors
+        //--------------------
         public int getCourseNumber()
         {
             return courseNumber;
@@ -93,11 +97,12 @@ namespace CourseRegistrationSystem
             return prereqs;
         }
 
+        // Increments class enrollment by 1
         public void addStudent()
         {
             currentEnrolled++;
         }
-
+        // Decreases class enrollment by 1
         public void removeStudent()
         {
             currentEnrolled--;
