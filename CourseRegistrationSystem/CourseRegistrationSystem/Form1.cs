@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,11 +20,30 @@ namespace CourseRegistrationSystem
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            if (UsernameTextbox.Text == "Sean" && PasswordTextBox.Text == "Password")
+            string username = UsernameTextbox.Text;
+            Student newStudent = new Student();
+            if (File.Exists(@username + ".dat"))
             {
-                RegistrationForm MyRegister = new RegistrationForm();
-                MyRegister.Show();
-                this.Hide();
+                newStudent.fillStudent(username);
+
+                if (PasswordTextBox.Text == newStudent.getPassword())
+                {
+                    RegistrationForm MyRegister = new RegistrationForm(this, newStudent);
+                    MyRegister.Show();
+                    UsernameTextbox.Text = "";
+                    PasswordTextBox.Text = "";
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect Username or Password.");
+                    PasswordTextBox.Text = "";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Incorrect Username or Password.");
+                PasswordTextBox.Text = "";
             }
         }
     }

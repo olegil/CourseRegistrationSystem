@@ -1,4 +1,4 @@
-﻿namespace StudentRegistrationSystem
+﻿namespace CourseRegistrationSystem
 {
     partial class CatalogForm
     {

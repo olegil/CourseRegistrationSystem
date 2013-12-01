@@ -10,16 +10,45 @@ using System.Windows.Forms;
 
 namespace CourseRegistrationSystem
 {
+    
     public partial class RegistrationForm : Form
     {
-        public RegistrationForm()
+        LoginForm myLoginForm;
+        CatalogForm myCatalogForm;
+        Student currentStudent;
+
+        public RegistrationForm(LoginForm previousForm, Student newStudent)
         {
+            currentStudent = newStudent;
+            myLoginForm = previousForm;
             InitializeComponent();
+            updateInfo();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LogOutButton_Click(object sender, EventArgs e)
         {
-            System.Environment.Exit(1);
+            myLoginForm.Show();
+            this.Close();
+        }
+
+        private void CatalogButton_Click(object sender, EventArgs e)
+        {
+            myCatalogForm = new CatalogForm();
+            myCatalogForm.Show();
+        }
+
+        public void updateInfo()
+        {
+            StudentIDTextBox.Text = currentStudent.getStudentID();
+            FirstNameTextBox.Text = currentStudent.getStudentFirstName();
+            LastNameTextBox.Text = currentStudent.getStudentLastName();
+            HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
+
+        }
+
+        public void loadCourses()
+        {
+
         }
     }
 }
