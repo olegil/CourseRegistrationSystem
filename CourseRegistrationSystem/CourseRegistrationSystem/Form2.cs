@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace CourseRegistrationSystem
         LoginForm myLoginForm;
         CatalogForm myCatalogForm;
         Student currentStudent;
+        Course[] courseList = new Course[1];
 
         public RegistrationForm(LoginForm previousForm, Student newStudent)
         {
@@ -23,6 +25,7 @@ namespace CourseRegistrationSystem
             myLoginForm = previousForm;
             InitializeComponent();
             updateInfo();
+            //loadCourses();
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)
@@ -48,7 +51,24 @@ namespace CourseRegistrationSystem
 
         public void loadCourses()
         {
+            int counter = 0;
+            string tempCourse = "";
 
+            System.IO.StreamReader fromDat = new System.IO.StreamReader("courselist.dat");
+
+            while (fromDat.EndOfStream)
+            {
+                fromDat.Read(tempCourse.ToCharArray(), 0, 6);
+                if (File.Exists(@tempCourse + ".dat"))
+                {
+                    courseList[counter].fillCourse(tempCourse);
+                    Array.Resize(ref courseList, courseList.Length + 1);
+                    counter++;
+                    fromDat.ReadLine();
+                }
+            }
+
+            fromDat.Close();
         }
     }
 }
