@@ -48,11 +48,14 @@ namespace CourseRegistrationSystem
             LastNameTextBox.Text = currentStudent.getStudentLastName();
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
             //CurrentScheduleListBox.Items.AddRange(currentStudent.getCurrentCourses());
+            /*
             for(int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
             {
                 CurrentScheduleListBox.Text += currentStudent.getCurrentCourses()[n].toString();
                 Console.WriteLine("Adding " + currentStudent.getCurrentCourses()[n].toString());
             }
+             * */
+            fillCurrentCoursesListView();
             for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
             {
                 CompletedCoursesTextBox.Text += currentStudent.getCompletedCourses()[n] + "\n";
@@ -105,6 +108,25 @@ namespace CourseRegistrationSystem
             }
 
             currentStudent.setCurrentCourses(coursesFromString);
+        }
+
+        public void fillCurrentCoursesListView()
+        {
+            ListViewItem courseListViewItems;
+
+            for (int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
+            {
+                courseListViewItems = new ListViewItem((currentStudent.getCurrentCourses()[n].getCourseNumber().ToString()));
+                courseListViewItems.SubItems.Add((currentStudent.getCurrentCourses()[n].getSubject().ToString()));
+                courseListViewItems.SubItems.Add((currentStudent.getCurrentCourses()[n].getfourDigits().ToString()));
+                courseListViewItems.SubItems.Add((currentStudent.getCurrentCourses()[n].getCourseName().ToString()));
+                courseListViewItems.SubItems.Add((currentStudent.getCurrentCourses()[n].getStartTime().ToString()));
+                courseListViewItems.SubItems.Add((currentStudent.getCurrentCourses()[n].getEndTime().ToString()));
+                courseListViewItems.SubItems.Add((currentStudent.getCurrentCourses()[n].getDays().ToString()));
+
+                CurrentCoursesListView.Items.Add(courseListViewItems);
+            }
+
         }
     }
     
