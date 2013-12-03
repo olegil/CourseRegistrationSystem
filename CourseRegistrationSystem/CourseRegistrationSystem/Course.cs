@@ -39,6 +39,40 @@ namespace CourseRegistrationSystem
             days = "MW";
         }
 
+        public Course(string fileName)
+        {
+            char tempChar;
+            int counter = 0;
+
+            System.IO.StreamReader fromDat = new System.IO.StreamReader("Courses\\" + @fileName + ".dat");
+
+            courseNumber = int.Parse(fromDat.ReadLine());
+            startTime = int.Parse(fromDat.ReadLine());
+            endTime = int.Parse(fromDat.ReadLine());
+            currentEnrolled = int.Parse(fromDat.ReadLine());
+            maxEnrolled = int.Parse(fromDat.ReadLine());
+            courseName = fromDat.ReadLine();
+            subject = fromDat.ReadLine();
+            fourDigits = fromDat.ReadLine();
+            days = fromDat.ReadLine();
+
+            fromDat.Read();
+            tempChar = (char)fromDat.Peek();
+
+            while (tempChar != '}' && !fromDat.EndOfStream)
+            {
+                while (fromDat.Peek() != ',' && fromDat.Peek() != '}')
+                {
+                    prereqsStrings[counter] += (char)fromDat.Read();
+                }
+                counter++;
+                tempChar = (char)fromDat.Read();
+                Array.Resize(ref prereqsStrings, prereqsStrings.Length + 1);
+            }
+
+            fromDat.Close();
+            Array.Resize(ref prereqsStrings, prereqsStrings.Length - 1);
+        }
 
         //-------------------------
         // Public member functions
@@ -63,7 +97,7 @@ namespace CourseRegistrationSystem
             char tempChar;
             int counter = 0;
 
-            System.IO.StreamReader fromDat = new System.IO.StreamReader(@fileName + ".dat");
+            System.IO.StreamReader fromDat = new System.IO.StreamReader("Courses\\" + @fileName + ".dat");
 
             courseNumber = int.Parse(fromDat.ReadLine());
             startTime = int.Parse(fromDat.ReadLine());
@@ -78,15 +112,19 @@ namespace CourseRegistrationSystem
             fromDat.Read();
             tempChar = (char)fromDat.Peek();
 
-            while (tempChar != '}' || fromDat.EndOfStream)
+            while (tempChar != '}' && !fromDat.EndOfStream)
             {
-                fromDat.Read(prereqsStrings[counter].ToCharArray(), 0, 6);
+                while (fromDat.Peek() != ',' && fromDat.Peek() != '}')
+                {
+                    prereqsStrings[counter] += (char)fromDat.Read();
+                }
                 counter++;
                 tempChar = (char)fromDat.Read();
                 Array.Resize(ref prereqsStrings, prereqsStrings.Length + 1);
             }
 
             fromDat.Close();
+            Array.Resize(ref prereqsStrings, prereqsStrings.Length - 1);
         }
 
         // returns ture if there is room for another student
@@ -98,6 +136,11 @@ namespace CourseRegistrationSystem
                 isRoom = true;
 
             return isRoom;
+        }
+
+        public string toString()
+        {
+            return courseNumber + "\t" + subject + "\t\t\t" + fourDigits + "\t" + courseName + "\t" + startTime + "-" + endTime + " " + days;
         }
 
         //--------------------
@@ -138,9 +181,9 @@ namespace CourseRegistrationSystem
             return days;
         }
 
-        public Course[] getPrereqs()
+        public string[] getPrereqsStrings()
         {
-            return prereqs;
+            return prereqsStrings;
         }
 
         // Increments class enrollment by 1

@@ -40,11 +40,13 @@
             this.FirstNameTextBox = new System.Windows.Forms.TextBox();
             this.HoldsTextBox = new System.Windows.Forms.TextBox();
             this.LastNameTextBox = new System.Windows.Forms.TextBox();
+            this.CurrentScheduleListBox = new System.Windows.Forms.ListBox();
+            this.CompletedCoursesTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LogOutButton
             // 
-            this.LogOutButton.Location = new System.Drawing.Point(582, 119);
+            this.LogOutButton.Location = new System.Drawing.Point(589, 119);
             this.LogOutButton.Name = "LogOutButton";
             this.LogOutButton.Size = new System.Drawing.Size(77, 27);
             this.LogOutButton.TabIndex = 0;
@@ -54,7 +56,7 @@
             // 
             // CatalogButton
             // 
-            this.CatalogButton.Location = new System.Drawing.Point(568, 50);
+            this.CatalogButton.Location = new System.Drawing.Point(559, 50);
             this.CatalogButton.Name = "CatalogButton";
             this.CatalogButton.Size = new System.Drawing.Size(107, 29);
             this.CatalogButton.TabIndex = 1;
@@ -148,12 +150,32 @@
             this.LastNameTextBox.Size = new System.Drawing.Size(166, 22);
             this.LastNameTextBox.TabIndex = 11;
             // 
+            // CurrentScheduleListBox
+            // 
+            this.CurrentScheduleListBox.FormattingEnabled = true;
+            this.CurrentScheduleListBox.ItemHeight = 16;
+            this.CurrentScheduleListBox.Location = new System.Drawing.Point(53, 271);
+            this.CurrentScheduleListBox.Name = "CurrentScheduleListBox";
+            this.CurrentScheduleListBox.Size = new System.Drawing.Size(263, 260);
+            this.CurrentScheduleListBox.TabIndex = 12;
+            // 
+            // CompletedCoursesTextBox
+            // 
+            this.CompletedCoursesTextBox.Location = new System.Drawing.Point(403, 271);
+            this.CompletedCoursesTextBox.Multiline = true;
+            this.CompletedCoursesTextBox.Name = "CompletedCoursesTextBox";
+            this.CompletedCoursesTextBox.ReadOnly = true;
+            this.CompletedCoursesTextBox.Size = new System.Drawing.Size(263, 263);
+            this.CompletedCoursesTextBox.TabIndex = 13;
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 555);
             this.ControlBox = false;
+            this.Controls.Add(this.CompletedCoursesTextBox);
+            this.Controls.Add(this.CurrentScheduleListBox);
             this.Controls.Add(this.LastNameTextBox);
             this.Controls.Add(this.HoldsTextBox);
             this.Controls.Add(this.FirstNameTextBox);
@@ -188,6 +210,8 @@
         private System.Windows.Forms.TextBox FirstNameTextBox;
         private System.Windows.Forms.TextBox HoldsTextBox;
         private System.Windows.Forms.TextBox LastNameTextBox;
+        private System.Windows.Forms.ListBox CurrentScheduleListBox;
+        private System.Windows.Forms.TextBox CompletedCoursesTextBox;
 
     }
 }

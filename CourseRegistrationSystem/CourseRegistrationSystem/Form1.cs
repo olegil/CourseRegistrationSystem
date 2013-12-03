@@ -22,7 +22,7 @@ namespace CourseRegistrationSystem
         {
             string username = UsernameTextbox.Text;
             Student newStudent = new Student();
-            if (File.Exists(@username + ".dat"))
+            if (File.Exists("Users\\" + @username + ".dat"))
             {
                 newStudent.fillStudent(username);
 

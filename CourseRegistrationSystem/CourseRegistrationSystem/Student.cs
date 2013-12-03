@@ -37,7 +37,7 @@ namespace CourseRegistrationSystem
          * password
          * email address
          * hold status
-         * {completed course 1, completed course 2, ..., completed course n}
+         * {completed class 1, completed class 2, ..., completed class n}
          * {current course 1, current course 2, ..., current course n}
          */
         public void fillStudent(string fileName)
@@ -45,8 +45,9 @@ namespace CourseRegistrationSystem
             char tempChar;
             int counter = 0;
 
-            System.IO.StreamReader fromDat = new System.IO.StreamReader(@fileName + ".dat");
+            System.IO.StreamReader fromDat = new System.IO.StreamReader("Users\\" + @fileName + ".dat");
 
+            // Fills out the data members of the student object 
             studentID = fromDat.ReadLine();
             studentFirstName = fromDat.ReadLine();
             studentLastName = fromDat.ReadLine();
@@ -54,33 +55,44 @@ namespace CourseRegistrationSystem
             emailAddress = fromDat.ReadLine();
             holdStatus = fromDat.ReadLine();
             
+            // Parses the completed courses for the student
             fromDat.Read();
             tempChar = (char)fromDat.Peek();
 
-            while (tempChar != '}' || fromDat.EndOfStream)
+            while (tempChar != '}' && !fromDat.EndOfStream)
             {
-                fromDat.Read(completedCoursesStrings[counter].ToCharArray(), 0, 6);
+                while (fromDat.Peek() != ',' && fromDat.Peek() != '}')
+                {
+                    completedCoursesStrings[counter] += (char)fromDat.Read();
+                }
                 counter++;
                 tempChar = (char)fromDat.Read();
                 Array.Resize(ref completedCoursesStrings, completedCoursesStrings.Length + 1);
             }
-
+            counter = 0;
             fromDat.ReadLine();
 
+            // Parses the current courses for the student
             fromDat.Read();
             tempChar = (char)fromDat.Peek();
-
-            while (tempChar != '}' || fromDat.EndOfStream)
+            while (tempChar != '}' && !fromDat.EndOfStream)
             {
-                fromDat.Read(currentCoursesStrings[counter].ToCharArray(), 0, 6);
+                while (fromDat.Peek() != ',' && fromDat.Peek() != '}')
+                {
+                    currentCoursesStrings[counter] += (char)fromDat.Read();
+                }
                 counter++;
                 tempChar = (char)fromDat.Read();
-                Array.Resize(ref currentCoursesStrings, completedCoursesStrings.Length + 1);
+                Array.Resize(ref currentCoursesStrings, currentCoursesStrings.Length + 1);
             }
-
+            counter = 0;
             fromDat.ReadLine();
 
             fromDat.Close();
+
+            // Trimming null spots from arrays
+            Array.Resize(ref completedCoursesStrings, completedCoursesStrings.Length - 1);
+            Array.Resize(ref currentCoursesStrings, currentCoursesStrings.Length - 1);
         }
         
         // Adds a course object to the students current courses array
@@ -119,7 +131,7 @@ namespace CourseRegistrationSystem
         {
             bool areMet = false;
 
-            Course[] requiredCourses = courseToAdd.getPrereqs();
+            string[] requiredCourses = courseToAdd.getPrereqsStrings();
 
             if (requiredCourses.Length == 0)
                 areMet = true;
@@ -129,7 +141,7 @@ namespace CourseRegistrationSystem
                 {
                     for (int c = 0; c < completedCourses.Length; c++)
                     {
-                        if (requiredCourses[a] == completedCourses[c])
+                        if (requiredCourses[a] == completedCoursesStrings[c])
                             areMet = true;
                         else
                             areMet = false;
@@ -195,6 +207,15 @@ namespace CourseRegistrationSystem
             if (holdStatus == "1")
                 tempStatus = true;
             return tempStatus;
+        }
+        public string[] getCurrentSchedule()
+        {
+            return currentCoursesStrings;
+        }
+
+        public string[] getCompletedCourses()
+        {
+            return completedCoursesStrings;
         }
     }
 }

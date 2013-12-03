@@ -25,7 +25,7 @@ namespace CourseRegistrationSystem
             myLoginForm = previousForm;
             InitializeComponent();
             updateInfo();
-            //loadCourses();
+            loadCourses();
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace CourseRegistrationSystem
 
         private void CatalogButton_Click(object sender, EventArgs e)
         {
-            myCatalogForm = new CatalogForm();
+            myCatalogForm = new CatalogForm(courseList);
             myCatalogForm.Show();
         }
 
@@ -46,7 +46,11 @@ namespace CourseRegistrationSystem
             FirstNameTextBox.Text = currentStudent.getStudentFirstName();
             LastNameTextBox.Text = currentStudent.getStudentLastName();
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
-
+            CurrentScheduleListBox.Items.AddRange(currentStudent.getCurrentSchedule());
+            for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
+            {
+                CompletedCoursesTextBox.Text += currentStudent.getCompletedCourses()[n] + "\n";
+            }
         }
 
         public void loadCourses()
@@ -54,21 +58,29 @@ namespace CourseRegistrationSystem
             int counter = 0;
             string tempCourse = "";
 
-            System.IO.StreamReader fromDat = new System.IO.StreamReader("courselist.dat");
+            System.IO.StreamReader fromDat = new System.IO.StreamReader("Courses\\courselist.dat");
 
-            while (fromDat.EndOfStream)
+            while (fromDat.Peek() != '*')
             {
-                fromDat.Read(tempCourse.ToCharArray(), 0, 6);
-                if (File.Exists(@tempCourse + ".dat"))
+                while (fromDat.Peek() != '\n' && fromDat.Peek() != 13)
                 {
-                    courseList[counter].fillCourse(tempCourse);
+                    tempCourse += (char)fromDat.Read();
+                }
+                fromDat.ReadLine();
+                if (File.Exists("Courses\\" + @tempCourse + ".dat"))
+                {
+                    courseList[counter] = new Course(tempCourse);
                     Array.Resize(ref courseList, courseList.Length + 1);
                     counter++;
-                    fromDat.ReadLine();
                 }
+                else
+                    Console.WriteLine(tempCourse + " file does not exist...");
+                tempCourse = "";
             }
-
+            
             fromDat.Close();
+
+            Array.Resize(ref courseList, courseList.Length - 1);
         }
     }
 }
