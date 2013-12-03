@@ -26,7 +26,6 @@ namespace CourseRegistrationSystem
             }
 
             InitializeComponent();
-            //CatalogListBox.Items.AddRange(courseList);
             fillCatalog();
             
         }

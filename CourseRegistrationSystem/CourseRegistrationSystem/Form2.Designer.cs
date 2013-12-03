@@ -42,14 +42,16 @@
             this.LastNameTextBox = new System.Windows.Forms.TextBox();
             this.CurrentScheduleListBox = new System.Windows.Forms.ListBox();
             this.CompletedCoursesTextBox = new System.Windows.Forms.TextBox();
+            this.AddCourseButton = new System.Windows.Forms.Button();
+            this.DropCourseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LogOutButton
             // 
-            this.LogOutButton.Location = new System.Drawing.Point(644, 119);
+            this.LogOutButton.Location = new System.Drawing.Point(644, 85);
             this.LogOutButton.Name = "LogOutButton";
             this.LogOutButton.Size = new System.Drawing.Size(77, 27);
-            this.LogOutButton.TabIndex = 0;
+            this.LogOutButton.TabIndex = 1;
             this.LogOutButton.Text = "Logout";
             this.LogOutButton.UseVisualStyleBackColor = true;
             this.LogOutButton.Click += new System.EventHandler(this.LogOutButton_Click);
@@ -59,7 +61,7 @@
             this.CatalogButton.Location = new System.Drawing.Point(614, 50);
             this.CatalogButton.Name = "CatalogButton";
             this.CatalogButton.Size = new System.Drawing.Size(107, 29);
-            this.CatalogButton.TabIndex = 1;
+            this.CatalogButton.TabIndex = 0;
             this.CatalogButton.Text = "Open Catalog";
             this.CatalogButton.UseVisualStyleBackColor = true;
             this.CatalogButton.Click += new System.EventHandler(this.CatalogButton_Click);
@@ -168,12 +170,32 @@
             this.CompletedCoursesTextBox.Size = new System.Drawing.Size(132, 263);
             this.CompletedCoursesTextBox.TabIndex = 13;
             // 
+            // AddCourseButton
+            // 
+            this.AddCourseButton.Location = new System.Drawing.Point(455, 144);
+            this.AddCourseButton.Name = "AddCourseButton";
+            this.AddCourseButton.Size = new System.Drawing.Size(97, 24);
+            this.AddCourseButton.TabIndex = 2;
+            this.AddCourseButton.Text = "Add Course";
+            this.AddCourseButton.UseVisualStyleBackColor = true;
+            // 
+            // DropCourseButton
+            // 
+            this.DropCourseButton.Location = new System.Drawing.Point(397, 189);
+            this.DropCourseButton.Name = "DropCourseButton";
+            this.DropCourseButton.Size = new System.Drawing.Size(155, 24);
+            this.DropCourseButton.TabIndex = 3;
+            this.DropCourseButton.Text = "Drop Selected Course";
+            this.DropCourseButton.UseVisualStyleBackColor = true;
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 555);
             this.ControlBox = false;
+            this.Controls.Add(this.DropCourseButton);
+            this.Controls.Add(this.AddCourseButton);
             this.Controls.Add(this.CompletedCoursesTextBox);
             this.Controls.Add(this.CurrentScheduleListBox);
             this.Controls.Add(this.LastNameTextBox);
@@ -212,6 +234,8 @@
         private System.Windows.Forms.TextBox LastNameTextBox;
         private System.Windows.Forms.ListBox CurrentScheduleListBox;
         private System.Windows.Forms.TextBox CompletedCoursesTextBox;
+        private System.Windows.Forms.Button AddCourseButton;
+        private System.Windows.Forms.Button DropCourseButton;
 
     }
 }

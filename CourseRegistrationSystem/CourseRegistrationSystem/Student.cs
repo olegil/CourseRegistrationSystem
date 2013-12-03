@@ -213,9 +213,19 @@ namespace CourseRegistrationSystem
             return currentCoursesStrings;
         }
 
+        public Course[] getCurrentCourses()
+        {
+            return currentCourses;
+        }
+
         public string[] getCompletedCourses()
         {
             return completedCoursesStrings;
+        }
+
+        public void setCurrentCourses(Course[] courses)
+        {
+            currentCourses = courses;
         }
     }
 }

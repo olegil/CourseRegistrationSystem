@@ -24,8 +24,9 @@ namespace CourseRegistrationSystem
             currentStudent = newStudent;
             myLoginForm = previousForm;
             InitializeComponent();
-            updateInfo();
             loadCourses();
+            fillStudentCurrentCoursesObject();
+            updateInfo();
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)
@@ -46,7 +47,12 @@ namespace CourseRegistrationSystem
             FirstNameTextBox.Text = currentStudent.getStudentFirstName();
             LastNameTextBox.Text = currentStudent.getStudentLastName();
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
-            CurrentScheduleListBox.Items.AddRange(currentStudent.getCurrentSchedule());
+            //CurrentScheduleListBox.Items.AddRange(currentStudent.getCurrentCourses());
+            for(int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
+            {
+                CurrentScheduleListBox.Text += currentStudent.getCurrentCourses()[n].toString();
+                Console.WriteLine("Adding " + currentStudent.getCurrentCourses()[n].toString());
+            }
             for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
             {
                 CompletedCoursesTextBox.Text += currentStudent.getCompletedCourses()[n] + "\n";
@@ -83,5 +89,23 @@ namespace CourseRegistrationSystem
 
             Array.Resize(ref courseList, courseList.Length - 1);
         }
+
+        public void fillStudentCurrentCoursesObject()
+        {
+            Course[] coursesFromString = new Course[currentStudent.getCurrentSchedule().Length];
+            for (int n = 0; n < coursesFromString.Length; n++)
+            {
+                for (int b = 0; b < courseList.Length; b++)
+                {
+                    if (currentStudent.getCurrentSchedule()[n] == courseList[b].getCourseNumber().ToString())
+                    {
+                        coursesFromString[n] = courseList[b];
+                    }
+                }
+            }
+
+            currentStudent.setCurrentCourses(coursesFromString);
+        }
     }
+    
 }

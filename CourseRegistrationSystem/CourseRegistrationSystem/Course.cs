@@ -140,7 +140,7 @@ namespace CourseRegistrationSystem
 
         public string toString()
         {
-            return courseNumber + "\t" + subject + "\t\t\t" + fourDigits + "\t" + courseName + "\t" + startTime + "-" + endTime + " " + days;
+            return courseNumber + " " + subject + " " + fourDigits + " " + courseName + " " + startTime + "-" + endTime + " " + days + "\n";
         }
 
         //--------------------
