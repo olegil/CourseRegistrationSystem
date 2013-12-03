@@ -53,6 +53,7 @@ namespace CourseRegistrationSystem
             }
         }
 
+        // Loads the courses into the courseList array
         public void loadCourses()
         {
             int counter = 0;

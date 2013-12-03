@@ -78,7 +78,7 @@
             // SubjectColumn
             // 
             this.SubjectColumn.Text = "Subject";
-            this.SubjectColumn.Width = 110;
+            this.SubjectColumn.Width = 125;
             // 
             // FourDigitsColumn
             // 
@@ -108,7 +108,7 @@
             // PrereqsColumn
             // 
             this.PrereqsColumn.Text = "Prerequisites";
-            this.PrereqsColumn.Width = 300;
+            this.PrereqsColumn.Width = 600;
             // 
             // CatalogForm
             // 

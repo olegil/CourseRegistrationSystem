@@ -46,7 +46,7 @@
             // 
             // LogOutButton
             // 
-            this.LogOutButton.Location = new System.Drawing.Point(589, 119);
+            this.LogOutButton.Location = new System.Drawing.Point(644, 119);
             this.LogOutButton.Name = "LogOutButton";
             this.LogOutButton.Size = new System.Drawing.Size(77, 27);
             this.LogOutButton.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             // CatalogButton
             // 
-            this.CatalogButton.Location = new System.Drawing.Point(559, 50);
+            this.CatalogButton.Location = new System.Drawing.Point(614, 50);
             this.CatalogButton.Name = "CatalogButton";
             this.CatalogButton.Size = new System.Drawing.Size(107, 29);
             this.CatalogButton.TabIndex = 1;
@@ -112,7 +112,7 @@
             // CompletedCoursesLabel
             // 
             this.CompletedCoursesLabel.AutoSize = true;
-            this.CompletedCoursesLabel.Location = new System.Drawing.Point(400, 250);
+            this.CompletedCoursesLabel.Location = new System.Drawing.Point(586, 250);
             this.CompletedCoursesLabel.Name = "CompletedCoursesLabel";
             this.CompletedCoursesLabel.Size = new System.Drawing.Size(135, 17);
             this.CompletedCoursesLabel.TabIndex = 7;
@@ -156,16 +156,16 @@
             this.CurrentScheduleListBox.ItemHeight = 16;
             this.CurrentScheduleListBox.Location = new System.Drawing.Point(53, 271);
             this.CurrentScheduleListBox.Name = "CurrentScheduleListBox";
-            this.CurrentScheduleListBox.Size = new System.Drawing.Size(263, 260);
+            this.CurrentScheduleListBox.Size = new System.Drawing.Size(499, 260);
             this.CurrentScheduleListBox.TabIndex = 12;
             // 
             // CompletedCoursesTextBox
             // 
-            this.CompletedCoursesTextBox.Location = new System.Drawing.Point(403, 271);
+            this.CompletedCoursesTextBox.Location = new System.Drawing.Point(589, 271);
             this.CompletedCoursesTextBox.Multiline = true;
             this.CompletedCoursesTextBox.Name = "CompletedCoursesTextBox";
             this.CompletedCoursesTextBox.ReadOnly = true;
-            this.CompletedCoursesTextBox.Size = new System.Drawing.Size(263, 263);
+            this.CompletedCoursesTextBox.Size = new System.Drawing.Size(132, 263);
             this.CompletedCoursesTextBox.TabIndex = 13;
             // 
             // RegistrationForm

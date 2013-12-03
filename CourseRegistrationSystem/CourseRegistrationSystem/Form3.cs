@@ -33,57 +33,29 @@ namespace CourseRegistrationSystem
 
         public void fillCatalog()
         {
-            //CatalogListView.s
-            //CatalogListView.Columns.Add("CRN", 60, HorizontalAlignment.Left);
+            ListViewItem courseListViewItems;
+            string prereqs = "";
+
             for (int n = 0; n < courseListObjects.Length; n++ )
             {
-                CatalogListView.Items.Add((courseListObjects[n].getCourseNumber().ToString()));
-            }
+                courseListViewItems = new ListViewItem((courseListObjects[n].getCourseNumber().ToString()));
+                courseListViewItems.SubItems.Add((courseListObjects[n].getSubject().ToString()));
+                courseListViewItems.SubItems.Add((courseListObjects[n].getfourDigits().ToString()));
+                courseListViewItems.SubItems.Add((courseListObjects[n].getCourseName().ToString()));
+                courseListViewItems.SubItems.Add((courseListObjects[n].getStartTime().ToString()));
+                courseListViewItems.SubItems.Add((courseListObjects[n].getEndTime().ToString()));
+                courseListViewItems.SubItems.Add((courseListObjects[n].getDays().ToString()));
 
-            //CatalogListView.Columns.Add("Subject", 100, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
-                CatalogListView.Items.Add((courseListObjects[n].getSubject().ToString()));
-            }
-
-            //CatalogListView.Columns.Add("Level", 40, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
-                CatalogListView.Items.Add((courseListObjects[n].getfourDigits().ToString()));
-            }
-
-            //CatalogListView.Columns.Add("Course Name", 100, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
-                CatalogListView.Items.Add((courseListObjects[n].getCourseName().ToString()));
-            }
-
-            //CatalogListView.Columns.Add("Starts", 60, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
-                CatalogListView.Items.Add((courseListObjects[n].getStartTime().ToString()));
-            }
-
-            //CatalogListView.Columns.Add("Ends", 60, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
-                CatalogListView.Items.Add((courseListObjects[n].getEndTime().ToString()));
-            }
-            
-            //CatalogListView.Columns.Add("Days", 60, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
-                CatalogListView.Items.Add((courseListObjects[n].getDays().ToString()));
-            }
-            
-            //CatalogListView.Columns.Add("Prerequisites", 60, HorizontalAlignment.Left);
-            for (int n = 0; n < courseListObjects.Length; n++)
-            {
                 for (int b = 0; b < courseListObjects[n].getPrereqsStrings().Length; b++)
                 {
-                    CatalogListView.Items.Add((courseListObjects[n].getPrereqsStrings()[b]));
+                    prereqs += " " + courseListObjects[n].getPrereqsStrings()[b];
                 }
+                courseListViewItems.SubItems.Add(prereqs);
+
+                CatalogListView.Items.Add(courseListViewItems);
+                prereqs = "";
             }
+            
         }
     }
 }
