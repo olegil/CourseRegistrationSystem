@@ -168,7 +168,47 @@ namespace CourseRegistrationSystem
             System.Net.NetworkCredential myCreds = new System.Net.NetworkCredential("TeamFusionSystems@gmail.com", "courseregistration");
             mySmtp.Credentials = myCreds;
             mySmtp.EnableSsl = true;
-            mySmtp.Send("TeamFusionSystems@gmail.com", currentStudent.getEmailAddress(), "Foo", "Bar");
+
+            string emailBody = "";
+
+            /*
+            for (int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
+            {
+                emailBody += currentStudent.getCurrentCourses()[n].toString() + "\n";
+            }
+            */
+            emailBody = "";
+
+            emailBody = "<table border=\"1\" bordercolor=\"#FFCC00\" style=\"background-color:#00BFFF\" width=\"100%\" cellpadding=\"3\" cellspacing=\"2\">";
+
+            emailBody +=
+                        "<tr>"
+                      + "<td align=\"center\">" + "<b>CRN" + "</td>"
+                      + "<td align=\"center\">" + "<b>Class" + "</td>"
+                      + "<td align=\"center\">" + "<b>Course Name" + "</td>"
+                      + "<td align=\"center\">" + "<b>Starts" + "-" + "Ends" + "</td>"
+                      + "<td align=\"center\">" + "<b>Days" + "</td>"
+                      + "</tr>";
+            for(int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
+            {
+                emailBody +=
+                        "<tr>"
+                      + "<td align=\"center\">" + currentStudent.getCurrentCourses()[n].getCourseNumber() + "</td>"
+                      + "<td align=\"center\">" + currentStudent.getCurrentCourses()[n].getSubject() + " " + currentStudent.getCurrentCourses()[n].getfourDigits() + "</td>"
+                      + "<td align=\"center\">" + currentStudent.getCurrentCourses()[n].getCourseName() + "</td>"
+                      + "<td align=\"center\">" + currentStudent.getCurrentCourses()[n].getStartTime() + "-" + currentStudent.getCurrentCourses()[n].getEndTime() + "</td>"
+                      + "<td align=\"center\">" + currentStudent.getCurrentCourses()[n].getDays() + "</td>"
+                      + "</tr>";
+            }
+
+            emailBody += "</table>";
+
+            System.Net.Mail.MailMessage myEmail = new System.Net.Mail.MailMessage("TeamFusionSystems@gmail.com", currentStudent.getEmailAddress(), "Your Requested School Schedule", emailBody);
+            myEmail.IsBodyHtml = true;
+            mySmtp.Send(myEmail);
+            //mySmtp.Send("TeamFusionSystems@gmail.com", currentStudent.getEmailAddress(), "Your Requested School Schedule", emailBody);
+
+            MessageBox.Show("Email has been sent to " + currentStudent.getEmailAddress());
         }
     }
     
