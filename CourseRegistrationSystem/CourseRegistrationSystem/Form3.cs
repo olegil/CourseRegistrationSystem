@@ -30,6 +30,7 @@ namespace CourseRegistrationSystem
             
         }
 
+        // Fills the catalog listview
         public void fillCatalog()
         {
             ListViewItem courseListViewItems;

@@ -190,15 +190,21 @@ namespace CourseRegistrationSystem
             return prereqsStrings;
         }
 
-        // Increments class enrollment by 1
+        // Increments class enrollment by 1, writes new total to the course dat file
         public void addStudent()
         {
             currentEnrolled++;
+            string[] fileContents = System.IO.File.ReadAllLines("Courses\\" + courseNumber.ToString() + ".dat");
+            fileContents[3] = currentEnrolled.ToString();
+            System.IO.File.WriteAllLines("Courses\\" + courseNumber.ToString() + ".dat", fileContents);
         }
-        // Decreases class enrollment by 1
+        // Decreases class enrollment by 1, writes new total to the course dat file
         public void removeStudent()
         {
             currentEnrolled--;
+            string[] fileContents = System.IO.File.ReadAllLines("Courses\\" + courseNumber.ToString() + ".dat");
+            fileContents[3] = currentEnrolled.ToString();
+            System.IO.File.WriteAllLines("Courses\\" + courseNumber.ToString() + ".dat", fileContents);
         }
     }
 }

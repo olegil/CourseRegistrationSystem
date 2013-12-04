@@ -29,18 +29,21 @@ namespace CourseRegistrationSystem
             updateInfo();
         }
 
+        // logs the current user out and returns to the login screen
         private void LogOutButton_Click(object sender, EventArgs e)
         {
             myLoginForm.Show();
             this.Close();
         }
 
+        // Opens the catalog form
         private void CatalogButton_Click(object sender, EventArgs e)
         {
             myCatalogForm = new CatalogForm(courseList);
             myCatalogForm.Show();
         }
 
+        // Updates the loaded students information into the text boxes and listview
         public void updateInfo()
         {
             StudentIDTextBox.Text = currentStudent.getStudentID();
@@ -120,6 +123,8 @@ namespace CourseRegistrationSystem
             }
 
         }
+
+        // Given a string (the course number), will return the course with that CRN
         public Course getCourseFromString(string courseString)
         {
             Course tempCourse = new Course();
@@ -132,6 +137,8 @@ namespace CourseRegistrationSystem
 
             return tempCourse;
         }
+
+        // On click, removes the course from the users current courses in their dat file and reduces occupied seats in the course dat file
         private void DropCourseButton_Click(object sender, EventArgs e)
         {
             if (CurrentCoursesListView.SelectedItems.Count != 0)
@@ -142,6 +149,7 @@ namespace CourseRegistrationSystem
             }
         }
 
+        // On click, adds the course in the courseInputTextBox to the users current courses, and in their dat file.  Increments occupied seats in course dat file
         private void AddCourseButton_Click(object sender, EventArgs e)
         {
             bool courseAdded = currentStudent.addCourse(getCourseFromString(CourseInputTextBox.Text));
@@ -152,6 +160,15 @@ namespace CourseRegistrationSystem
             }
             fillCurrentCoursesListView();
             CourseInputTextBox.Text = "";
+        }
+
+        private void EmailScheduleButton_Click(object sender, EventArgs e)
+        {
+            System.Net.Mail.SmtpClient mySmtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+            System.Net.NetworkCredential myCreds = new System.Net.NetworkCredential("TeamFusionSystems@gmail.com", "courseregistration");
+            mySmtp.Credentials = myCreds;
+            mySmtp.EnableSsl = true;
+            mySmtp.Send("TeamFusionSystems@gmail.com", currentStudent.getEmailAddress(), "Foo", "Bar");
         }
     }
     

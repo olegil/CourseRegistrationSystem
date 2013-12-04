@@ -251,6 +251,7 @@
             this.EmailScheduleButton.TabIndex = 15;
             this.EmailScheduleButton.Text = "Email Schedule";
             this.EmailScheduleButton.UseVisualStyleBackColor = true;
+            this.EmailScheduleButton.Click += new System.EventHandler(this.EmailScheduleButton_Click);
             // 
             // CourseInputTextBox
             // 
