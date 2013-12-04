@@ -101,7 +101,10 @@ namespace CourseRegistrationSystem
             bool canAdd = true;
 
             if (prereqsMet(courseToAdd) && courseToAdd.isOpen() && !timeOverlap(courseToAdd))
+            {
                 canAdd = true;
+                currentCourses
+            }
 
             if (canAdd)
                 courseToAdd.addStudent();
@@ -117,11 +120,21 @@ namespace CourseRegistrationSystem
             for (int a = 0; a < currentCourses.Length && canDrop == false; a++)
             {
                 if (courseToDrop == currentCourses[a])
+                {
                     canDrop = true;
+
+                    for (int n = a; n < currentCourses.Length - 1; n++)
+                    {
+                        currentCourses[n] = currentCourses[n + 1];
+                    }
+                }
             }
 
             if (canDrop)
+            {
+                Array.Resize(ref currentCourses, currentCourses.Length - 1);
                 courseToDrop.removeStudent();
+            }
 
             return canDrop;
         }
@@ -163,12 +176,12 @@ namespace CourseRegistrationSystem
             {
                 for (int a = 0; a < currentCourses.Length && isOverlapping == true; a++)
                 {
-                    if (courseToAdd.getStartTime() > currentCourses[a].getStartTime() && courseToAdd.getStartTime() < currentCourses[a].getEndTime())
+                    if (courseToAdd.getStartTime() >= currentCourses[a].getStartTime() && courseToAdd.getStartTime() <= currentCourses[a].getEndTime())
                         isOverlapping = true;
                     else
                         isOverlapping = false;
 
-                    if (courseToAdd.getEndTime() > currentCourses[a].getStartTime() && courseToAdd.getStartTime() < currentCourses[a].getEndTime())
+                    if (courseToAdd.getEndTime() >= currentCourses[a].getStartTime() && courseToAdd.getStartTime() <= currentCourses[a].getEndTime())
                         isOverlapping = true;
                     else
                         isOverlapping = false;

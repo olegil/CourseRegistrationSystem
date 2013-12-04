@@ -44,6 +44,7 @@ namespace CourseRegistrationSystem
                 courseListViewItems.SubItems.Add((courseListObjects[n].getStartTime().ToString()));
                 courseListViewItems.SubItems.Add((courseListObjects[n].getEndTime().ToString()));
                 courseListViewItems.SubItems.Add((courseListObjects[n].getDays().ToString()));
+                courseListViewItems.SubItems.Add(courseListObjects[n].getOpenSeats().ToString());
 
                 for (int b = 0; b < courseListObjects[n].getPrereqsStrings().Length; b++)
                 {

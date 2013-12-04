@@ -38,6 +38,7 @@
             this.EndTimeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DaysColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PrereqsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.OpenSeatsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // CatalogListBox
@@ -60,6 +61,7 @@
             this.StartTimeColumn,
             this.EndTimeColumn,
             this.DaysColumn,
+            this.OpenSeatsColumn,
             this.PrereqsColumn});
             this.CatalogListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CatalogListView.FullRowSelect = true;
@@ -107,8 +109,13 @@
             // 
             // PrereqsColumn
             // 
+            this.PrereqsColumn.DisplayIndex = 7;
             this.PrereqsColumn.Text = "Prerequisites";
             this.PrereqsColumn.Width = 600;
+            // 
+            // OpenSeatsColumn
+            // 
+            this.OpenSeatsColumn.Text = "Seats";
             // 
             // CatalogForm
             // 
@@ -138,5 +145,6 @@
         private System.Windows.Forms.ColumnHeader EndTimeColumn;
         private System.Windows.Forms.ColumnHeader DaysColumn;
         private System.Windows.Forms.ColumnHeader PrereqsColumn;
+        private System.Windows.Forms.ColumnHeader OpenSeatsColumn;
     }
 }

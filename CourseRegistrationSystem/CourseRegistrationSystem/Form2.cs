@@ -93,6 +93,7 @@ namespace CourseRegistrationSystem
             Array.Resize(ref courseList, courseList.Length - 1);
         }
 
+        // Uses the students coursesFromString and adds Course objects to the students currentCourses array
         public void fillStudentCurrentCoursesObject()
         {
             Course[] coursesFromString = new Course[currentStudent.getCurrentSchedule().Length];
@@ -110,10 +111,11 @@ namespace CourseRegistrationSystem
             currentStudent.setCurrentCourses(coursesFromString);
         }
 
+        // Fills the listview with the students current courses
         public void fillCurrentCoursesListView()
         {
+            CurrentCoursesListView.Items.Clear(); 
             ListViewItem courseListViewItems;
-
             for (int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
             {
                 courseListViewItems = new ListViewItem((currentStudent.getCurrentCourses()[n].getCourseNumber().ToString()));
@@ -127,6 +129,33 @@ namespace CourseRegistrationSystem
                 CurrentCoursesListView.Items.Add(courseListViewItems);
             }
 
+        }
+        public Course getCourseFromString(string courseString)
+        {
+            Course tempCourse = new Course();
+
+            for (int n = 0; n < courseList.Length; n++ )
+            {
+                if (courseList[n].getCourseNumber().ToString() == courseString)
+                    tempCourse = courseList[n];
+            }
+
+            return tempCourse;
+        }
+        private void DropCourseButton_Click(object sender, EventArgs e)
+        {
+            if (CurrentCoursesListView.SelectedItems.Count != 0)
+            {
+                Console.WriteLine(CurrentCoursesListView.SelectedItems[0].Text);
+                Course courseToDrop = getCourseFromString(CurrentCoursesListView.SelectedItems[0].Text);
+                currentStudent.dropCourse(courseToDrop);
+                fillCurrentCoursesListView();
+            }
+        }
+
+        private void AddCourseButton_Click(object sender, EventArgs e)
+        {
+            currentStudent.addCourse(getCourseFromString(CourseInputTextBox.Text));
         }
     }
     

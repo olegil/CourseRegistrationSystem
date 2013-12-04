@@ -146,6 +146,10 @@ namespace CourseRegistrationSystem
         //--------------------
         // Standard accessors
         //--------------------
+        public int getOpenSeats()
+        {
+            return maxEnrolled - currentEnrolled;
+        }
         public int getCourseNumber()
         {
             return courseNumber;
