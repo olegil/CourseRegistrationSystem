@@ -212,11 +212,12 @@
             // CourseNumberColumn
             // 
             this.CourseNumberColumn.Text = "CRN";
+            this.CourseNumberColumn.Width = 72;
             // 
             // SubjectColumn
             // 
             this.SubjectColumn.Text = "Subject";
-            this.SubjectColumn.Width = 125;
+            this.SubjectColumn.Width = 139;
             // 
             // FourDigitsColumn
             // 
@@ -226,22 +227,21 @@
             // CourseNameColumn
             // 
             this.CourseNameColumn.Text = "Course Name";
-            this.CourseNameColumn.Width = 200;
+            this.CourseNameColumn.Width = 252;
             // 
             // StartTimeColumn
             // 
             this.StartTimeColumn.Text = "Starts";
-            this.StartTimeColumn.Width = 50;
+            this.StartTimeColumn.Width = 66;
             // 
             // EndTimeColumn
             // 
             this.EndTimeColumn.Text = "Ends";
-            this.EndTimeColumn.Width = 50;
             // 
             // DaysColumn
             // 
             this.DaysColumn.Text = "Days";
-            this.DaysColumn.Width = 50;
+            this.DaysColumn.Width = 62;
             // 
             // EmailScheduleButton
             // 

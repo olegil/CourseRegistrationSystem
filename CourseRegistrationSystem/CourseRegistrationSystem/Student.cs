@@ -98,16 +98,28 @@ namespace CourseRegistrationSystem
         // Adds a course object to the students current courses array
         public bool addCourse(Course courseToAdd)
         {
-            bool canAdd = true;
+            //System.IO.StreamReader fromDat = new System.IO.StreamReader("Users\\" + studentLastName + studentFirstName[0] + studentID[studentID.Length - 1]+ ".dat");
+
+
+            bool canAdd = false;
 
             if (prereqsMet(courseToAdd) && courseToAdd.isOpen() && !timeOverlap(courseToAdd))
             {
+                string[] fileContents = System.IO.File.ReadAllLines("Users\\" + studentLastName + studentFirstName[0] + studentID[studentID.Length - 1] + ".dat");
+                fileContents[7] = "{";
                 canAdd = true;
-                currentCourses
-            }
-
-            if (canAdd)
+                Array.Resize(ref currentCourses, currentCourses.Length + 1);
+                currentCourses[currentCourses.Length - 1] = courseToAdd;
                 courseToAdd.addStudent();
+                for (int n = 0; n < currentCourses.Length; n++)
+                {
+                    fileContents[7] += currentCourses[n].getCourseNumber().ToString();
+                    if (n < currentCourses.Length - 1)
+                        fileContents[7] += ",";
+                }
+                        fileContents[7] += "}";
+                System.IO.File.WriteAllLines("Users\\" + studentLastName + studentFirstName[0] + studentID[studentID.Length - 1] + ".dat", fileContents);
+            }
 
             return canAdd;
         }
@@ -132,8 +144,18 @@ namespace CourseRegistrationSystem
 
             if (canDrop)
             {
+                string[] fileContents = System.IO.File.ReadAllLines("Users\\" + studentLastName + studentFirstName[0] + studentID[studentID.Length - 1] + ".dat");
+                fileContents[7] = "{";
                 Array.Resize(ref currentCourses, currentCourses.Length - 1);
                 courseToDrop.removeStudent();
+                for (int n = 0; n < currentCourses.Length; n++)
+                {
+                    fileContents[7] += currentCourses[n].getCourseNumber().ToString();
+                    if (n < currentCourses.Length - 1)
+                        fileContents[7] += ",";                        
+                }
+                    fileContents[7] += "}";
+                System.IO.File.WriteAllLines("Users\\" + studentLastName + studentFirstName[0] + studentID[studentID.Length - 1] + ".dat", fileContents);
             }
 
             return canDrop;
@@ -142,27 +164,32 @@ namespace CourseRegistrationSystem
         // Compares the prerequisits of the input course with the completed courses array to determine if the prereqs are met
         public bool prereqsMet(Course courseToAdd)
         {
-            bool areMet = false;
-
+            bool allReqsMet = true;
             string[] requiredCourses = courseToAdd.getPrereqsStrings();
+            bool[] areMet = new bool[requiredCourses.Length];
 
-            if (requiredCourses.Length == 0)
-                areMet = true;
-            else
+            for (int b = 0; b < requiredCourses.Length; b++)
             {
-                for (int a = 0; a < requiredCourses.Length && areMet == true; a++)
+                areMet[b] = false;
+            }
+
+            if (requiredCourses.Length != 0)
+            {
+                for (int a = 0; a < requiredCourses.Length; a++)
                 {
-                    for (int c = 0; c < completedCourses.Length; c++)
+                    for (int c = 0; c < completedCoursesStrings.Length; c++)
                     {
                         if (requiredCourses[a] == completedCoursesStrings[c])
-                            areMet = true;
-                        else
-                            areMet = false;
+                            areMet[a] = true;
                     }
                 }
             }
 
-            return areMet;
+            for (int n = 0; n < requiredCourses.Length; n++)
+            {
+                allReqsMet = allReqsMet & areMet[n];
+            }
+            return allReqsMet;
         }
 
         // Compares the current schedule of the student and the propsed class to add to check for time conflictions
@@ -174,20 +201,17 @@ namespace CourseRegistrationSystem
                 isOverlapping = false;
             else
             {
-                for (int a = 0; a < currentCourses.Length && isOverlapping == true; a++)
+                for (int a = 0; a < currentCourses.Length && isOverlapping == false; a++)
                 {
-                    if (courseToAdd.getStartTime() >= currentCourses[a].getStartTime() && courseToAdd.getStartTime() <= currentCourses[a].getEndTime())
+                    if (   (courseToAdd.getStartTime() >= currentCourses[a].getStartTime() && courseToAdd.getStartTime() <= currentCourses[a].getEndTime() && (courseToAdd.getDays() == currentCourses[a].getDays()))
+                        || (courseToAdd.getStartTime() == currentCourses[a].getStartTime() && (courseToAdd.getDays() == currentCourses[a].getDays()))
+                        || (courseToAdd.getStartTime() == currentCourses[a].getEndTime() && (courseToAdd.getDays() == currentCourses[a].getDays()))
+                        || (courseToAdd.getEndTime() >= currentCourses[a].getStartTime() && courseToAdd.getStartTime() <= currentCourses[a].getEndTime() && (courseToAdd.getDays() == currentCourses[a].getDays()))
+                        || (courseToAdd.getEndTime() == currentCourses[a].getEndTime() && (courseToAdd.getDays() == currentCourses[a].getDays()))
+                        || (courseToAdd.getEndTime() == currentCourses[a].getStartTime() && (courseToAdd.getDays() == currentCourses[a].getDays())))
                         isOverlapping = true;
-                    else
-                        isOverlapping = false;
-
-                    if (courseToAdd.getEndTime() >= currentCourses[a].getStartTime() && courseToAdd.getStartTime() <= currentCourses[a].getEndTime())
-                        isOverlapping = true;
-                    else
-                        isOverlapping = false;
                 }
             }
-
             return isOverlapping;
         }
 

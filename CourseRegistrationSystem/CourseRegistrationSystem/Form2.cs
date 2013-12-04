@@ -47,14 +47,6 @@ namespace CourseRegistrationSystem
             FirstNameTextBox.Text = currentStudent.getStudentFirstName();
             LastNameTextBox.Text = currentStudent.getStudentLastName();
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
-            //CurrentScheduleListBox.Items.AddRange(currentStudent.getCurrentCourses());
-            /*
-            for(int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
-            {
-                CurrentScheduleListBox.Text += currentStudent.getCurrentCourses()[n].toString();
-                Console.WriteLine("Adding " + currentStudent.getCurrentCourses()[n].toString());
-            }
-             * */
             fillCurrentCoursesListView();
             for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
             {
@@ -83,8 +75,6 @@ namespace CourseRegistrationSystem
                     Array.Resize(ref courseList, courseList.Length + 1);
                     counter++;
                 }
-                else
-                    Console.WriteLine(tempCourse + " file does not exist...");
                 tempCourse = "";
             }
             
@@ -146,7 +136,6 @@ namespace CourseRegistrationSystem
         {
             if (CurrentCoursesListView.SelectedItems.Count != 0)
             {
-                Console.WriteLine(CurrentCoursesListView.SelectedItems[0].Text);
                 Course courseToDrop = getCourseFromString(CurrentCoursesListView.SelectedItems[0].Text);
                 currentStudent.dropCourse(courseToDrop);
                 fillCurrentCoursesListView();
@@ -155,7 +144,14 @@ namespace CourseRegistrationSystem
 
         private void AddCourseButton_Click(object sender, EventArgs e)
         {
-            currentStudent.addCourse(getCourseFromString(CourseInputTextBox.Text));
+            bool courseAdded = currentStudent.addCourse(getCourseFromString(CourseInputTextBox.Text));
+            
+            if(courseAdded == false)
+            {
+                MessageBox.Show("Could not add course.\nPlease make sure you don't have holds, you have the prerequisites completed, and there is not a time conflict.");
+            }
+            fillCurrentCoursesListView();
+            CourseInputTextBox.Text = "";
         }
     }
     
