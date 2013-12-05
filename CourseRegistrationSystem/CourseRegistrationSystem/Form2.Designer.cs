@@ -35,12 +35,10 @@
             this.FirstNameLabel = new System.Windows.Forms.Label();
             this.HoldsLabel = new System.Windows.Forms.Label();
             this.CurrentScheduleLabel = new System.Windows.Forms.Label();
-            this.CompletedCoursesLabel = new System.Windows.Forms.Label();
             this.StudentIDTextBox = new System.Windows.Forms.TextBox();
             this.FirstNameTextBox = new System.Windows.Forms.TextBox();
             this.HoldsTextBox = new System.Windows.Forms.TextBox();
             this.LastNameTextBox = new System.Windows.Forms.TextBox();
-            this.CompletedCoursesTextBox = new System.Windows.Forms.TextBox();
             this.AddCourseButton = new System.Windows.Forms.Button();
             this.DropCourseButton = new System.Windows.Forms.Button();
             this.CurrentCoursesListView = new System.Windows.Forms.ListView();
@@ -53,13 +51,15 @@
             this.DaysColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EmailScheduleButton = new System.Windows.Forms.Button();
             this.CourseInputTextBox = new System.Windows.Forms.TextBox();
+            this.CompletedCoursesListView = new System.Windows.Forms.ListView();
+            this.CompletedCoursesColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // LogOutButton
             // 
-            this.LogOutButton.Location = new System.Drawing.Point(643, 79);
+            this.LogOutButton.Location = new System.Drawing.Point(545, 31);
             this.LogOutButton.Name = "LogOutButton";
-            this.LogOutButton.Size = new System.Drawing.Size(77, 25);
+            this.LogOutButton.Size = new System.Drawing.Size(115, 25);
             this.LogOutButton.TabIndex = 1;
             this.LogOutButton.Text = "Logout";
             this.LogOutButton.UseVisualStyleBackColor = true;
@@ -67,9 +67,9 @@
             // 
             // CatalogButton
             // 
-            this.CatalogButton.Location = new System.Drawing.Point(613, 114);
+            this.CatalogButton.Location = new System.Drawing.Point(545, 62);
             this.CatalogButton.Name = "CatalogButton";
-            this.CatalogButton.Size = new System.Drawing.Size(107, 25);
+            this.CatalogButton.Size = new System.Drawing.Size(115, 25);
             this.CatalogButton.TabIndex = 0;
             this.CatalogButton.Text = "Open Catalog";
             this.CatalogButton.UseVisualStyleBackColor = true;
@@ -120,15 +120,6 @@
             this.CurrentScheduleLabel.TabIndex = 6;
             this.CurrentScheduleLabel.Text = "Current Schedule:";
             // 
-            // CompletedCoursesLabel
-            // 
-            this.CompletedCoursesLabel.AutoSize = true;
-            this.CompletedCoursesLabel.Location = new System.Drawing.Point(305, 8);
-            this.CompletedCoursesLabel.Name = "CompletedCoursesLabel";
-            this.CompletedCoursesLabel.Size = new System.Drawing.Size(135, 17);
-            this.CompletedCoursesLabel.TabIndex = 7;
-            this.CompletedCoursesLabel.Text = "Completed Courses:";
-            // 
             // StudentIDTextBox
             // 
             this.StudentIDTextBox.Location = new System.Drawing.Point(114, 31);
@@ -161,18 +152,9 @@
             this.LastNameTextBox.Size = new System.Drawing.Size(166, 22);
             this.LastNameTextBox.TabIndex = 11;
             // 
-            // CompletedCoursesTextBox
-            // 
-            this.CompletedCoursesTextBox.Location = new System.Drawing.Point(308, 31);
-            this.CompletedCoursesTextBox.Multiline = true;
-            this.CompletedCoursesTextBox.Name = "CompletedCoursesTextBox";
-            this.CompletedCoursesTextBox.ReadOnly = true;
-            this.CompletedCoursesTextBox.Size = new System.Drawing.Size(132, 189);
-            this.CompletedCoursesTextBox.TabIndex = 13;
-            // 
             // AddCourseButton
             // 
-            this.AddCourseButton.Location = new System.Drawing.Point(623, 197);
+            this.AddCourseButton.Location = new System.Drawing.Point(505, 169);
             this.AddCourseButton.Name = "AddCourseButton";
             this.AddCourseButton.Size = new System.Drawing.Size(97, 25);
             this.AddCourseButton.TabIndex = 2;
@@ -182,7 +164,7 @@
             // 
             // DropCourseButton
             // 
-            this.DropCourseButton.Location = new System.Drawing.Point(565, 145);
+            this.DropCourseButton.Location = new System.Drawing.Point(505, 198);
             this.DropCourseButton.Name = "DropCourseButton";
             this.DropCourseButton.Size = new System.Drawing.Size(155, 25);
             this.DropCourseButton.TabIndex = 3;
@@ -245,9 +227,9 @@
             // 
             // EmailScheduleButton
             // 
-            this.EmailScheduleButton.Location = new System.Drawing.Point(607, 48);
+            this.EmailScheduleButton.Location = new System.Drawing.Point(547, 93);
             this.EmailScheduleButton.Name = "EmailScheduleButton";
-            this.EmailScheduleButton.Size = new System.Drawing.Size(113, 25);
+            this.EmailScheduleButton.Size = new System.Drawing.Size(115, 25);
             this.EmailScheduleButton.TabIndex = 15;
             this.EmailScheduleButton.Text = "Email Schedule";
             this.EmailScheduleButton.UseVisualStyleBackColor = true;
@@ -255,28 +237,47 @@
             // 
             // CourseInputTextBox
             // 
-            this.CourseInputTextBox.Location = new System.Drawing.Point(491, 198);
+            this.CourseInputTextBox.Location = new System.Drawing.Point(608, 170);
             this.CourseInputTextBox.Name = "CourseInputTextBox";
             this.CourseInputTextBox.Size = new System.Drawing.Size(112, 22);
             this.CourseInputTextBox.TabIndex = 16;
             // 
+            // CompletedCoursesListView
+            // 
+            this.CompletedCoursesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CompletedCoursesColumn});
+            this.CompletedCoursesListView.FullRowSelect = true;
+            this.CompletedCoursesListView.GridLines = true;
+            this.CompletedCoursesListView.Location = new System.Drawing.Point(308, 12);
+            this.CompletedCoursesListView.MultiSelect = false;
+            this.CompletedCoursesListView.Name = "CompletedCoursesListView";
+            this.CompletedCoursesListView.Size = new System.Drawing.Size(191, 208);
+            this.CompletedCoursesListView.TabIndex = 17;
+            this.CompletedCoursesListView.UseCompatibleStateImageBehavior = false;
+            this.CompletedCoursesListView.View = System.Windows.Forms.View.Details;
+            // 
+            // CompletedCoursesColumn
+            // 
+            this.CompletedCoursesColumn.Text = "Completed Courses";
+            this.CompletedCoursesColumn.Width = 185;
+            // 
             // RegistrationForm
             // 
+            this.AcceptButton = this.AddCourseButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 431);
             this.ControlBox = false;
+            this.Controls.Add(this.CompletedCoursesListView);
             this.Controls.Add(this.CourseInputTextBox);
             this.Controls.Add(this.EmailScheduleButton);
             this.Controls.Add(this.CurrentCoursesListView);
             this.Controls.Add(this.DropCourseButton);
             this.Controls.Add(this.AddCourseButton);
-            this.Controls.Add(this.CompletedCoursesTextBox);
             this.Controls.Add(this.LastNameTextBox);
             this.Controls.Add(this.HoldsTextBox);
             this.Controls.Add(this.FirstNameTextBox);
             this.Controls.Add(this.StudentIDTextBox);
-            this.Controls.Add(this.CompletedCoursesLabel);
             this.Controls.Add(this.CurrentScheduleLabel);
             this.Controls.Add(this.HoldsLabel);
             this.Controls.Add(this.FirstNameLabel);
@@ -285,6 +286,7 @@
             this.Controls.Add(this.CatalogButton);
             this.Controls.Add(this.LogOutButton);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RegistrationForm";
             this.Text = "Course Registration System";
             this.ResumeLayout(false);
@@ -301,12 +303,10 @@
         private System.Windows.Forms.Label FirstNameLabel;
         private System.Windows.Forms.Label HoldsLabel;
         private System.Windows.Forms.Label CurrentScheduleLabel;
-        private System.Windows.Forms.Label CompletedCoursesLabel;
         private System.Windows.Forms.TextBox StudentIDTextBox;
         private System.Windows.Forms.TextBox FirstNameTextBox;
         private System.Windows.Forms.TextBox HoldsTextBox;
         private System.Windows.Forms.TextBox LastNameTextBox;
-        private System.Windows.Forms.TextBox CompletedCoursesTextBox;
         private System.Windows.Forms.Button AddCourseButton;
         private System.Windows.Forms.Button DropCourseButton;
         private System.Windows.Forms.ListView CurrentCoursesListView;
@@ -319,6 +319,8 @@
         private System.Windows.Forms.ColumnHeader DaysColumn;
         private System.Windows.Forms.Button EmailScheduleButton;
         private System.Windows.Forms.TextBox CourseInputTextBox;
+        private System.Windows.Forms.ListView CompletedCoursesListView;
+        private System.Windows.Forms.ColumnHeader CompletedCoursesColumn;
 
     }
 }

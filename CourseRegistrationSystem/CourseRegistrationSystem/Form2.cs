@@ -51,10 +51,17 @@ namespace CourseRegistrationSystem
             LastNameTextBox.Text = currentStudent.getStudentLastName();
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
             fillCurrentCoursesListView();
+
+            /////////////////////////////////////////////////////
+            ListViewItem completedCoursesListViewItems;
+
             for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
             {
-                CompletedCoursesTextBox.Text += currentStudent.getCompletedCourses()[n] + "\n";
+                completedCoursesListViewItems = new ListViewItem(currentStudent.getCompletedCourses()[n]);
+                CompletedCoursesListView.Items.Add(completedCoursesListViewItems);
+                //(currentStudent.getCompletedCourses()[n]);
             }
+
         }
 
         // Loads the courses into the courseList array
@@ -154,7 +161,7 @@ namespace CourseRegistrationSystem
         {
             bool courseAdded = currentStudent.addCourse(getCourseFromString(CourseInputTextBox.Text));
             
-            if(courseAdded == false)
+            if(courseAdded == false && CourseInputTextBox.Text != "")
             {
                 MessageBox.Show("Could not add course.\nPlease make sure you don't have holds, you have the prerequisites completed, and there is not a time conflict.");
             }
@@ -206,7 +213,6 @@ namespace CourseRegistrationSystem
             System.Net.Mail.MailMessage myEmail = new System.Net.Mail.MailMessage("TeamFusionSystems@gmail.com", currentStudent.getEmailAddress(), "Your Requested School Schedule", emailBody);
             myEmail.IsBodyHtml = true;
             mySmtp.Send(myEmail);
-            //mySmtp.Send("TeamFusionSystems@gmail.com", currentStudent.getEmailAddress(), "Your Requested School Schedule", emailBody);
 
             MessageBox.Show("Email has been sent to " + currentStudent.getEmailAddress());
         }
