@@ -285,8 +285,11 @@
             this.Controls.Add(this.StudentIDLabel);
             this.Controls.Add(this.CatalogButton);
             this.Controls.Add(this.LogOutButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(750, 476);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(750, 476);
             this.Name = "RegistrationForm";
             this.Text = "Course Registration System";
             this.ResumeLayout(false);

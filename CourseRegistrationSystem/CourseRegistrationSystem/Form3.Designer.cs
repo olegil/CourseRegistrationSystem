@@ -124,7 +124,9 @@
             this.Controls.Add(this.CatalogListView);
             this.Controls.Add(this.CatalogListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 600);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "CatalogForm";
             this.Text = "Course Catalog";

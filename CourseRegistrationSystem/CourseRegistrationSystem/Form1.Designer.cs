@@ -114,6 +114,7 @@
             this.Controls.Add(this.UsernameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.Text = "Course Registration Login";
             this.ResumeLayout(false);
