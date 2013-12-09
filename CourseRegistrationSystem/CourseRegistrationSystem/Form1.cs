@@ -18,6 +18,8 @@ namespace CourseRegistrationSystem
             InitializeComponent();
         }
 
+        // Handles action for when the login button is clicked
+        // Verifies the users password against their stored password
         private void LoginButton_Click(object sender, EventArgs e)
         {
             string username = UsernameTextbox.Text;

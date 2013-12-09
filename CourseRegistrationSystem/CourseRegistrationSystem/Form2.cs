@@ -14,10 +14,10 @@ namespace CourseRegistrationSystem
     
     public partial class RegistrationForm : Form
     {
-        LoginForm myLoginForm;
-        CatalogForm myCatalogForm;
-        Student currentStudent;
-        Course[] courseList = new Course[1];
+        LoginForm myLoginForm;                  
+        CatalogForm myCatalogForm;              
+        Student currentStudent;                 
+        Course[] courseList = new Course[1];    
 
         public RegistrationForm(LoginForm previousForm, Student newStudent)
         {
@@ -52,14 +52,12 @@ namespace CourseRegistrationSystem
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
             fillCurrentCoursesListView();
 
-            /////////////////////////////////////////////////////
             ListViewItem completedCoursesListViewItems;
 
             for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
             {
                 completedCoursesListViewItems = new ListViewItem(currentStudent.getCompletedCourses()[n]);
                 CompletedCoursesListView.Items.Add(completedCoursesListViewItems);
-                //(currentStudent.getCompletedCourses()[n]);
             }
 
         }
@@ -169,6 +167,7 @@ namespace CourseRegistrationSystem
             CourseInputTextBox.Text = "";
         }
 
+        // On button click, emails the courses listed under "current schedule" to the user at the email address provided in the dat file
         private void EmailScheduleButton_Click(object sender, EventArgs e)
         {
             System.Net.Mail.SmtpClient mySmtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
@@ -177,14 +176,6 @@ namespace CourseRegistrationSystem
             mySmtp.EnableSsl = true;
 
             string emailBody = "";
-
-            /*
-            for (int n = 0; n < currentStudent.getCurrentCourses().Length; n++)
-            {
-                emailBody += currentStudent.getCurrentCourses()[n].toString() + "\n";
-            }
-            */
-            emailBody = "";
 
             emailBody = "<table border=\"1\" bordercolor=\"#FFCC00\" style=\"background-color:#00BFFF\" width=\"100%\" cellpadding=\"3\" cellspacing=\"2\">";
 

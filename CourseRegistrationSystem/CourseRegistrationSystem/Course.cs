@@ -39,6 +39,8 @@ namespace CourseRegistrationSystem
             days = "MW";
         }
 
+
+        // Constructs the course object by loading information from the given filename
         public Course(string fileName)
         {
             char tempChar;
@@ -137,7 +139,7 @@ namespace CourseRegistrationSystem
 
             return isRoom;
         }
-
+        // Returns a string containing the course information
         public string toString()
         {
             return courseNumber + " " + subject + " " + fourDigits + " " + courseName + " " + startTime + "-" + endTime + " " + days + "\n";
@@ -198,6 +200,7 @@ namespace CourseRegistrationSystem
             fileContents[3] = currentEnrolled.ToString();
             System.IO.File.WriteAllLines("Courses\\" + courseNumber.ToString() + ".dat", fileContents);
         }
+
         // Decreases class enrollment by 1, writes new total to the course dat file
         public void removeStudent()
         {

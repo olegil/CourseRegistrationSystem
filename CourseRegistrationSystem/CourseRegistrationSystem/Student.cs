@@ -98,9 +98,6 @@ namespace CourseRegistrationSystem
         // Adds a course object to the students current courses array
         public bool addCourse(Course courseToAdd)
         {
-            //System.IO.StreamReader fromDat = new System.IO.StreamReader("Users\\" + studentLastName + studentFirstName[0] + studentID[studentID.Length - 1]+ ".dat");
-
-
             bool canAdd = false;
 
             if (prereqsMet(courseToAdd) && courseToAdd.isOpen() && !timeOverlap(courseToAdd))

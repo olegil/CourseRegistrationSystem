@@ -30,7 +30,7 @@ namespace CourseRegistrationSystem
             
         }
 
-        // Fills the catalog listview
+        // Fills the catalog listview with the courses passed from Form2
         public void fillCatalog()
         {
             ListViewItem courseListViewItems;
