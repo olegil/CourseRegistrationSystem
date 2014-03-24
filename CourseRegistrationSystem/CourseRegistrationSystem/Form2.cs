@@ -39,6 +39,7 @@ namespace CourseRegistrationSystem
         // Opens the catalog form
         private void CatalogButton_Click(object sender, EventArgs e)
         {
+            loadCourses();
             myCatalogForm = new CatalogForm(courseList);
             myCatalogForm.Show();
         }
@@ -51,7 +52,6 @@ namespace CourseRegistrationSystem
             LastNameTextBox.Text = currentStudent.getStudentLastName();
             HoldsTextBox.Text = currentStudent.getHoldStatus().ToString();
             fillCurrentCoursesListView();
-
             ListViewItem completedCoursesListViewItems;
 
             for (int n = 0; n < currentStudent.getCompletedCourses().Length; n++)
